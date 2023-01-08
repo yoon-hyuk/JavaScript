@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        .note{
+            border: 1px solid;
+            min-height:300px;
+        }
+    </style>
+</head>
+<body>
+    <h1>type</h1>
+    <pre>
+        primitive type : String(문자열), Number(숫자), Boolean, Null, Underfined
+                데이터를 복사할 때 깊은 복사가 되는 타입
+
+        reference type : object
+                데이터를 복사할 때 얕은 복사가 되는 타입
+    </pre>
+
+    <!-- typeNote 요소를 클릭하는 사용자 이벤트 발생 시 testType 함수를 호출하도록 -->
+    <div class="note" id="typeNote" onclick="testType()">
+    
+    
+    </div>
+    <script>
+        function testType(){
+            let name = "하명도";
+            let age = 13;
+            let isLeave = true;
+            let empty = null;
+            let notInit;
+            let obj = {
+                name:'hmd',
+                age:13,
+                toString:function(){
+                    return '13인 hmd입니다.'
+                }
+            }
+
+            function add(n1,n2){
+                return n1+n2;
+            }
+
+            let hobby = ['축구','배구','농구'];
+
+            // html element 객체를 자바스크립트로 반환
+            // dom 트리에 접근할 수 있는 객체 : document
+
+            //
+
+
+            //★document.querySelector
+            //document의 querySelector 메소드는 선택자를 인자로 전달받아,
+            //전달받은 선택자와 일치하는 문서 내 첫 번째 요소(Element)를 반환한다. 
+            //일치하는 요소가 없으면 ‘없다’라는 의미의 null 데이터를 반환한다. 
+            //인자로 전달되는 선택자는 문자열 타입의 ‘유효한 CSS 선택자’를 의미한다.
+            // ex) id가 typeNote인 요소를 선택하자. => document.querySelector('#typeNote');
+   
+
+            let typeNote = document.querySelector('#typeNote');
+            console.dir(typeNote);
+            console.dir(add(1,2));
+            console.dir(obj);
+
+            typeNote.innerHTML = '';
+            typeNote.innerHTML += '<b>name : </b>' + typeof(name) + '<br>';
+            typeNote.innerHTML += '<b>age : </b>' + typeof(age) + '<br>';
+            typeNote.innerHTML += '<b>isLeave : </b>' + typeof(isLeave) + '<br>';
+            typeNote.innerHTML += '<b>empty : </b>' + typeof(empty) + '<br>';
+            typeNote.innerHTML += '<b>notInit : </b>' + typeof(notInit) + '<br>';
+            typeNote.innerHTML += '<b>obj : </b>' + typeof(obj) + '<br>';
+            typeNote.innerHTML += '<b>add : </b>' + typeof(add) + '<br>';
+            typeNote.innerHTML += '<b>hobby : </b>' + typeof(hobby) + '<br>';
+        }
+    </script>
+    
+    <h1>자바스크리브 타입들의 Boolean 변환</h1>
+    <pre>
+        조건식에서 활용될 경우 false가 되는 값들 : 0,"",null,Underfined,NaN,[]
+        조건식에서 활용될 경우 true가 되는 값들 : false가 되는 경우를 제외하고 모든 true
+    
+    </pre>
+    <script>
+        console.dir(0&&true?`0은 true입니다.`:`0은 false 입니다`);
+        console.dir(''&&true?`공백문자는 true입니다.`:`0은 false 입니다`);
+        console.dir(null&&true?`null은 true입니다.`:`0은 false 입니다`);
+        console.dir(undefined&&true?`undifined은 true입니다.`:`0은 false 입니다`);
+        console.dir(NaN&&true?`NaN은 true입니다.`:`0은 false 입니다`);
+        console.dir([]&&true?`[]은 true입니다.`:`[]은 false 입니다`);
+
+
+
+    </script>
+
+
+    <h1> 타입 관련 함수 </h1>
+    <h2>String</h2>
+    <pre>
+        자바스크립트의 String literal은 '',""로 사용할 수 있다.
+        String은 자바스크립트의 내장객체로 문자열들을 다루기 위한 메서드를 제공해준다.
+    </pre>
+    <div id="stringNote" class="note"></div>
+    <script>
+        
+        let stringNote = document.querySelector('#stringNote');
+        stringNote.innerHTML += '';
+        
+        let test = 'Multicampus JAVA Class';
+
+        // 문자를 대문자로 변환하여 stringNote의 영역에 문자열을 출력해주세요.
+        stringNote.innerHTML += test.toUpperCase() + '<br>';
+        console.dir(test.toUpperCase());
+
+        // 문자를 소문자로 변환하여 stringNote의 영역에 문자열을 출력해주세요.
+        stringNote.innerHTML += test.toLowerCase() + '<br>';
+        console.dir(test.toLowerCase());
+        let fruits = '사과,바나나,복숭아,키위,파인애플';
+
+        //fruits를 , 기준으로 잘라 console.dir()을 사용해 출력해주세요.
+        stringNote.innerHTML += test.split(',') + '<br>' ;
+        console.dir(fruits.split(','));
+        
+        //test를 0번 인텍스부터 3번 인덱스까지 잘라 console.dir()을 사용해 출력해 주세요.
+        stringNote.innerHTML += test.substring(0,4) + '<br>';
+        console.dir(test.substring(0,4));
+
+        //test의 JAVA를 JavaScript로 변환해 console.dir()을 사용해 출력해주세요.
+        stringNote.innerHTML += test.replace('JAVA','JavaScript') + '<br>';
+        console.dir(test.replace('JAVA','JavaScript'));
+    </script>
+
+    <h1>문자열 Template Literals</h1>
+    <pre>
+        ★백팁( ` )을 이용한 템플릿 리터럴
+
+        - 템플릿 리터럴은 표현식을 내장할 수 있는 문자열 표현법이다. 
+
+        이는 문자열의 내용에 데이터를 삽입한다는 것을 의미한다. 템플릿 리터럴로 표현한 문자열 내부
+
+        에 플레이스홀더(${})를 기입하고, 그 안에 데이터를 기입하면 데이터는 문자열 의 멤버가 된다.
+
+
+    </pre>
+    <div id="templateLiteralsNote" class="note"></div>
+
+    <script>
+        let tln = document.querySelector('#templateLiteralsNote');
+
+        let name = '윤혁';
+        let age = 28;
+        let gender = '남성';
+        let introduce = '제 이름은' + name + '이고, 나이는 ' + age + '살 이고, 성별은 ' + gender + '입니다.';
+
+        tln.innerHTML += '이름 : ' + name + '<br>';
+        tln.innerHTML += '나이 : ' + age + '<br>';
+        tln.innerHTML += '성별 : ' + gender + '<br>';
+        tln.innerHTML += '소개 : ' + introduce + '<br>';
+
+        tln.innerHTML += '<br>';
+        tln.innerHTML += 'template lierals 적용';
+
+        introduce = `제 이름은 ${name} 이고, 나이는 ${age}살 이고, 성별은 ${gender}입니다. `
+
+        tln.innerHTML +=`이름 : ${name} <br>`;
+        tln.innerHTML +=`나이 : ${age} <br>`;
+        tln.innerHTML +=`성별 : ${gender} <br>`;
+        tln.innerHTML +=`소개 : ${introduce} <br>`;
+
+        let poem = `어느 날 네가 또 슬피 울 때, 네가 기억하기를 \n`
+                    + `네가 나의 자랑이란걸 \n`
+                    + `기억력이 좋은 네가 기억하기를 \n`
+                    + `바라면서 나는 얼쩡거렸지. \n`;
+       
+       
+        let poemliteral = `어느 날 네가 또 슬피 울 때, 네가 기억하기를
+                    네가 나의 자랑이란걸
+                    기억력이 좋은 네가 기억하기를
+                    바라면서 나는 얼쩡거렸지.`;
+                   
+                   
+        console.dir(poem);
+        console.dir(poemliteral);
+
+    </script>
+
+    <h2>Math</h2>
+    <pre>
+        자바스크립트 내장 객체로 숫자를 자루기 위한 메서드를 가지고 있다.
+    </pre>
+    <div id = "mathNote" class="note"></div>
+    <script>
+        let mathNote = document.querySelector('#mathNote');
+
+        //절대값
+        mathNote.innerHTML += `-123의 절대값 : ${Math.abs(-123)} <br>`;
+        //난수
+        mathNote.innerHTML += `난수를 구해보자 : ${Math.random()} <br>`
+        //반올림
+        mathNote.innerHTML += `123.456 반올림을 구해보자 : ${Math.round(123.456)}<br>`
+        //올림
+        mathNote.innerHTML += `123.456 올림을 구해보자 : ${Math.ceil(123.456)}<br>`
+        //내림
+        mathNote.innerHTML += `123.456 내림을구해보자 : ${Math.floor(123.456)}<br>`
+
+        //Number.toFixed
+        //고정소수점 방식으로 숫자를 나타내는
+
+    </script>
+
+</body>
+</html>
