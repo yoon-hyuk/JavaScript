@@ -41,11 +41,11 @@
             maxinumAge: 0 // 0으로 설정하면 항상 최신의 현재위치 수집
         };
 
-        btn.addEventListener('click', ev => {
+        //btn.addEventListener('click', ev => {
             let geo = navigator.geolocation;
             geo.getCurrentPosition(success, error, options);
             // getCurrentPosition(위치얻기에 성공했을때 콜백함수, 위치얻기 실패했을때 콜백함수, 옵션)
-        });
+       // });
 
 
     </script>
