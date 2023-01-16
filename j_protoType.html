@@ -102,7 +102,7 @@
             hmd.__proto__ = university;
             hyuk.__proto__ = university;
             krystal.__proto__= university;
-
+            // university는 hmd, hyuk, krystal의 공통부분 --> hyuk.__proto__ = university => hyuk은 university를 상속받는다
             $('#protoTypeNote',`---------------프로토타입을 변경------------------------`);
 
             Students.forEach(e => {

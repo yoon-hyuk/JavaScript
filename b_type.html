@@ -16,10 +16,10 @@
     <h1>type</h1>
     <pre>
         primitive type : String(문자열), Number(숫자), Boolean, Null, Underfined
-                데이터를 복사할 때 깊은 복사가 되는 타입
+                데이터를 복사할 때 깊은 복사가 되는 타입 / 복사 후 새로운 주소 생성
 
         reference type : object
-                데이터를 복사할 때 얕은 복사가 되는 타입
+                데이터를 복사할 때 얕은 복사가 되는 타입 / 복사 후 같은 주소를 참조(인스턴스 생성 X) 
     </pre>
 
     <!-- typeNote 요소를 클릭하는 사용자 이벤트 발생 시 testType 함수를 호출하도록 -->
@@ -87,11 +87,11 @@
     </pre>
     <script>
         console.dir(0&&true?`0은 true입니다.`:`0은 false 입니다`);
-        console.dir(''&&true?`공백문자는 true입니다.`:`0은 false 입니다`);
-        console.dir(null&&true?`null은 true입니다.`:`0은 false 입니다`);
-        console.dir(undefined&&true?`undifined은 true입니다.`:`0은 false 입니다`);
-        console.dir(NaN&&true?`NaN은 true입니다.`:`0은 false 입니다`);
-        console.dir([]&&true?`[]은 true입니다.`:`[]은 false 입니다`);
+        console.dir(''&&true?`공백문자는 true입니다.`:`공백문자는 false 입니다`);
+        console.dir(null&&true?`null은 true입니다.`:`null은 false 입니다`);
+        console.dir(undefined&&true?`undifined은 true입니다.`:`undifined은 false 입니다`);
+        console.dir(NaN&&true?`NaN은 true입니다.`:`NAN은 false 입니다`); 
+        console.dir([]&&true?`[]은 true입니다.`:`[]은 false 입니다`);   
 
 
 
@@ -178,9 +178,9 @@
        
        
         let poemliteral = `어느 날 네가 또 슬피 울 때, 네가 기억하기를
-                    네가 나의 자랑이란걸
-                    기억력이 좋은 네가 기억하기를
-                    바라면서 나는 얼쩡거렸지.`;
+                            네가 나의 자랑이란걸
+                            기억력이 좋은 네가 기억하기를
+                            바라면서 나는 얼쩡거렸지.`;
                    
                    
         console.dir(poem);

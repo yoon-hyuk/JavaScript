@@ -24,6 +24,8 @@
         변수선언 : var 변수명, 변수, es6 이전
                   let 변수명, 변수, es6 이후
                   const 변수명, 상수 es6 이후   
+
+        변수의 생성과정은 1.선언 2.초기화 3.할당 단계로 진행된다.          
     </pre>
 
     <pre>
@@ -40,18 +42,28 @@
     <script type="text/javascript">
         
         //선언한적 없는 hello를 초기화
-        hello = 'hello world!';
+        var hello = 'hello world!';
         console.dir(hello);//자바의 syso와 같은역활
         //alert(hello); 경고창
-   
-        //letHello = 'hello let';
+        
+        
+        console.dir(hyuk);                                      //  var hyuk;                   호이스팅 발생으로 선언한 부분이 먼저 실행
+        var hyuk = '윤혁';                                      //  console.dir(hyuk);           초기화되지 않아서 undifined 출력
+        // var는 호이스팅으로 오류발생x but undifined 출력        //  var hyuk = '윤혁';
+
+
+
+        
+        console.dir(Hello);
+        let Hello = 'hello let';
+        // let은 호이스팅이 발생하지 않음으로 오류발생// 선언 => 실행!
 
         // hello 선언
         var hello;
         let letHello;
         const constHello = 'hello const';
 
-        //const는 상수이기 때문에 초기화 이후 수정할 수 없다.
+        //const는 상수이기 때문에 초기화 이후 수정할 수 없다. | const는 선언과 초기화를 동시에 해주어야한다
         //contHello = 'hi const'; 'hello const'로 먼저 선언되었기 때문에 상수인 constHello는 수정 불가능하다.
 
         //함수 실행
@@ -68,8 +80,8 @@
         함수레벨스코프 && 블록레벨스코프
         scope : 메모리에 변수가 올라가고 내려오는 기준, 또는 범위
 
-        var             : 함수레벨스코프
-        let, const      : 블록레벨스코프
+        var             : 함수레벨스코프 (함수 안에서 사용가능)
+        let, const      : 블록레벨스코프 (블록 내에서 선언 된 변수만 지역변수)
     </pre>
     <script>
         function testVariablScope(){

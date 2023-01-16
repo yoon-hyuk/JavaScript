@@ -45,6 +45,7 @@
             fnc1.innerHTML += 'hello function<br>';
             $('#fnc1','$함수를 사용해서 찍은 hello function');
         }
+        //hello(); 호이스팅이 발생하기 때문에 나중에 선언해도 정상작동한다.
     </script>
 
     <h2>함수 표현식</h2>
@@ -82,7 +83,7 @@
         lamda.innerHTML += `-----------------------------<br>`;
 
         let lamda1 = (e,i) => {
-            lamda.innerHTML += `${i}, ${e}<br>`;
+            lamda.innerHTML += `${i+1}번째, ${e}<br>`;
         }
         fruitsArr.forEach(lamda1);
 
@@ -93,7 +94,7 @@
         lamda.innerHTML += `-----------------------------<br>`;
 
 
-        fruitsArr.forEach(e => {lamda.innerHTML += `${e}<br>`;})
+        fruitsArr.forEach(e => lamda.innerHTML += `${e}<br>`);
 
         //3.매개변수가 하나만 있고 함수에 return문만 존재하는 람다. 
 
@@ -179,7 +180,7 @@
         let num2 = 2;
         let num3 = 100;
 
-        scopeNote.innerHTML += `${num}, ${num2}, ${num3}`
+        scopeNote.innerHTML += `${num}, ${num2}, ${num3}` // 1,2,100
 
         // 전역이 outerScope함수의 상위스코프
         // 따라서 num, num2, num3에 접근할 수 있다.
@@ -187,13 +188,13 @@
             
             let num = 9;
             let num2 = 8;
-            scopeNote.innerHTML += `outerScope 함수 : ${num}, ${num2}, ${num3}`
+            scopeNote.innerHTML += `outerScope 함수 : ${num}, ${num2}, ${num3}`; // 9,8,100
 
             function innerScope(){
                 let str = "hi";
                 let str2 = "hello";
-                scopeNote.innerHTML += `innerScope 함수 : ${str}, ${str2}`;
-                //scopeNote.innerHTML += `${str}, ${str2}`;;  접근가능
+                scopeNote.innerHTML += `innerScope 함수 : ${str}, ${str2}`; //hi, hello
+                scopeNote.innerHTML += `${num}, ${num3}`; //9,100
             }
             // 하위 스코프의 변수에는 접근할 수 없다.     
             // scopeNote.innerHTML += `${str}, ${str2}`; (function innerScope안에서는 접근가능 -> 실행된다.)

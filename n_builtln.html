@@ -19,6 +19,8 @@
         if(message){
             htmlElements.forEach(e => {e.innerHTML += message + '<br>'});
         }
+
+        if(htmlElements.length == 1) return htmlElements[0];
         return htmlElements;
     }
     </script>

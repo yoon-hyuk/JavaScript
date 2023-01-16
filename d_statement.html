@@ -35,7 +35,7 @@
     <button onclick='testFor()'>확인하기</button>
     <div id='forNote'></div>
     
-    <label>forEach: <input type="number" id='forEach' placeholder='좋아하는 문장을 입력하세요.'></label>
+    <label>forEach: <input type="text" id='forEach' placeholder='좋아하는 문장을 입력하세요.'></label>
     <button onclick='testForEach()'>확인하기</button>
     <div id='forEachNote'></div>
 
@@ -43,8 +43,7 @@
         function testIf(){
             
             let input = document.querySelector('#if').valueAsNumber;
-            let ifNote = document.querySelector('#ifNote');
-
+        
             if(input == 1 ){
                 ifNote.innerHTML += '1입니다. <br>';
             }else if(input == 2){

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        span{
+            display:inline-block;
+            width:300px;
+        }
+
+        tr{
+            height:30px;
+        }
+
+        a{
+            cursor: pointer;
+        }
+
+        .valid-msg{
+            width:100%;
+            display:none;
+            color:red;
+            font-size:10px;
+        }
+
+        .popup{
+            display: none;
+            position : absolute;
+            width: 50vW;
+            height:50vh;
+            top:50%;
+            left:50%;
+            transform: translate(-50%,-50%);
+            background-color:lightblue;
+        }
+    </style>
+    <script src="./resources/js/common.js"></script>
+</head>
+<body>
+    <div class="popup"></div>
+
+    <div id="wrapInp">
+
+        <label>
+                <span>아이디:</span>
+                <input type="text" id="id" class="inp-user">
+                <span class="vaild-msg">아이디는 필수 입력입니다.</span>
+        </label>
+
+        <br>
+
+        <label>
+                <span>비밀번호:</span>
+                <input type="text" id="pw" class="inp-user">
+                <span class="vaild-msg">비밀번호는 필수 입력입니다.</span>
+        </label>
+
+        <br>
+
+        <label>
+                <span>주소:</span>
+                <input type="text" id="addr" class="inp-user">
+                <span class="vaild-msg">주소는 필수 입력입니다.</span>
+        </label>
+
+        <br>
+
+        <label>
+            <span>전화번호:</span>
+            <input type="text" id="tel" class="inp-user">
+            <span class="vaild-msg">전화번호는 필수 입력입니다.</span>
+         </label>
+
+         <br>
+
+         <hr>
+         <button id="add">추가</button>
+         <button id="delAll">전체삭제</button>
+         <button id="btnPopup">팝업창</button>
+    </div>
+    <hr>
+    <div>
+        <table border=1>
+            <thead>
+                <tr>
+                    <th width="100">아이디</th>
+                    <th width="100">비밀번호</th>
+                    <th width="300">주소</th>
+                    <th width="300">전화번호</th>
+                    <th width="100">삭제</th>
+                </tr>
+            </thead>
+            <tbody id="contents">
+            </tbody>
+        </table>
+    </div>
+<script>
+    
+    // 팝업버튼
+    btnPopup.addEventListener('click', ev=>{
+        $('.popup')[0].style.display = 'block';
+        setTimeout(()=>{
+            $('.popup')[0].style.display = 'none';
+        },3000)
+    })
+
+    
+    let validate = (inputList) =>{
+        $('.valid-msg').forEach(e => {e.style.display = 'none'});
+
+        let errors = inputList.filter(e => !e.value);
+        errors.forEach(e => {e.nextElementSibling.style.display = 'inline';})
+
+        if(errors.length){
+            errors[0].focus();
+            return false;
+        }
+
+        return true;
+    }
+
+    // 추가버튼
+    add.addEventListener('click', ev=>{
+
+        let inputList = Array.prototype.slice.call($('.inp-user'));
+
+        if(!validate(inputList)) return;
+
+        let tr = createElement('tr');
+        inputList.forEach(e=>{
+            tr.append(createElement('td',{text:e.value}));
+        })
+
+        let delCell = createDelCell();
+        tr.append(delCell);
+        contents.append(tr);
+    });
+
+    // 전체삭제버튼
+    delAll.addEventListener('click', ev => {
+        contents.innerHTML = '';
+    })
+
+    let createDelCell = () =>{
+        let delCell = createElement('td');
+        
+        delCell.addEventListener('mouseover', ev =>{
+            delCell.parentElement.style.backgroundColor='lightcoral';
+            delCell.parentElement.style.color='white';
+        });
+
+        delCell.addEventListener('mouseout', ev =>{
+            // a태그에 마우스를 올리고 실행하면 target이 a태그로 나온다.
+            // 이벤트 버블링으로 인해 delCell의 이벤트가 실행
+            console.dir(ev.target);
+            delCell.parentElement.remove();
+        });
+
+        delCell.append(createElement('a',{text:'삭제'}));
+        return delCell;
+    }
+
+
+
+
+
+</script>
+
+
+
+
+</body>
+</html>

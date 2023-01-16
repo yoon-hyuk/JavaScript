@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./resources/js/common.js"></script>
+    <style type="text/css">
+        .note{
+            border: 1px solid;
+            min-height:300px;
+        }
+
+        .wrap>div{
+            display:flex;
+            justify-content: space-between;
+            height: 10vw;
+            width:80vw;
+            text-align: center;
+            font-size: 1vw;
+        }
+
+        .wrap>div>div{
+            width:20%;
+            height:90%;
+            border:1px solid black;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+        }
+
+        .wrap>div:first-child{
+            height:20%;
+        }
+
+        img{
+            width:30%;
+            height:90%;
+        }
+
+    </style>
+</head>
+<body>
+   
+   
+   
+   
+    <!-- <div class="wrap" id="wrap">
+        <div class="contents iu"></div>
+        <div class="contents jo"></div>
+        <div class="contents iu"></div>
+        <div class="contents jo"></div>
+        
+    </div> -->
+
+    <input type='text' id='keyword'>
+    <button id = 'btnSearch'>검색</button>
+
+    <hr>
+    <div class='wrap' id="contents">
+            <div class = 'wrap_book'>
+                    <div class="title">제목</div>
+                    <div class="price">가격</div>
+                    <div class="publisher">출판사</div>
+                    <div class="thum">이미지</div>
+            </div>     
+    </div>
+    <script>
+        const KAKAO_API_KEY ='KakaoAK fece723708634228bc6d90c3319a90ce';
+        let page;
+        let isEnd = false;
+
+        btnSearch.addEventListener('click',async ev =>{
+            page = 10;
+            let data = await kakaoBookAPI(keyword.value, page);
+            renderBooks(data);
+        })
+
+        async function getData(url, queryString){
+        const reponse = await fetch(url,{
+            headers:{'Authorization' : KAKAO_API_KEY}
+        })
+
+        return reponse.json();
+    }
+
+    let kakaoBookAPI = async (keyword,page) =>{
+        let url = `https://dapi.kakao.com/v3/search/book?query=${keyword}&page=${page}`;
+        let data = await getData(url);
+        return data;
+    }
+
+    let renderBooks = (data) => {
+        isEnd = data.meta.is_end;
+
+        let bookData = data.documents.map(e => {
+            return {title: e.title,
+                    price: e.price,
+                    publisher : e.publisher,
+                    thumbnail: e.thumbnail
+            };
+        });
+
+        let columnName = $('.wrap_book')[0].outerHTML;
+        contents.innerHTML = '';
+        contents.innerHTML += columnName;
+
+        bookData.forEach(e =>{
+            $('.wrap')[0].innerHTML += columnName;
+            lastWrapBook = $('.wrap')[0].lastElementChild;
+            lastWrapBook.children[0].innerHTML = e.title;
+            lastWrapBook.children[1].innerHTML = e.price;
+            lastWrapBook.children[2].innerHTML = e.publisher;
+            lastWrapBook.children[3].innerHTML = '';
+            lastWrapBook.children[3].style.backgroundImage = `url(${e.thumbnail})`
+        });
+    }
+
+        // let bg = ['iu','jo','emma','onebin'];
+        // let idx = 0;
+
+         document.addEventListener('scroll', ev => {
+        //     // 스크롤된 길이 > 전체 컨텐츠 길이 - 사용자 화면의 
+             if(scrollY > wrap.clientHeight - screen.availHeight){
+                wrap.append(createElement('div',{prop:`${json}`}));
+                 
+             }
+         })
+    </script>
+
+</body>
+</html>
